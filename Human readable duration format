@@ -1,0 +1,22 @@
+def format_duration(seconds):
+    if seconds == 0:
+        return "now"
+    
+    units = [
+        ('year', 365 * 24 * 60 * 60),
+        ('day', 24 * 60 * 60),
+        ('hour', 60 * 60),
+        ('minute', 60),
+        ('second', 1)
+    ]
+    
+    duration = []
+    for unit, duration_in_seconds in units:
+        if seconds >= duration_in_seconds:
+            count = seconds // duration_in_seconds
+            seconds %= duration_in_seconds
+            if count > 1:
+                unit += 's'
+            duration.append(f"{count} {unit}")
+    
+    return ', '.join(duration[:-1]) + ' and ' + duration[-1] if len(duration) > 1 else duration[0]
