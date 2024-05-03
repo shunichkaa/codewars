@@ -1,0 +1,13 @@
+def increment_string(s):
+    num_part = ''
+    for char in reversed(s):
+        if char.isdigit():
+            num_part = char + num_part
+        else:
+            break
+    if num_part:
+        num_len = len(num_part)
+        num = str(int(num_part) + 1).zfill(num_len)
+        return s[:-num_len] + num
+    else:
+        return s + '1'
