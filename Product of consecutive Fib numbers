@@ -1,0 +1,5 @@
+def productFib(prod):
+    fib_prev, fib_current = 0, 1
+    while fib_prev * fib_current < prod:
+        fib_prev, fib_current = fib_current, fib_prev + fib_current
+    return [fib_prev, fib_current, fib_prev * fib_current == prod]
