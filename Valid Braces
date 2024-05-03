@@ -1,0 +1,10 @@
+def valid_braces(s):
+    stack = []
+    matches = {'(': ')', '[': ']', '{': '}'}
+    for char in s:
+        if char in matches:  # Opening brace
+            stack.append(char)
+        elif char in matches.values():  # Closing brace
+            if not stack or matches[stack.pop()] != char:
+                return False
+    return not stack
