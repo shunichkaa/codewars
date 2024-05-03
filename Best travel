@@ -1,0 +1,9 @@
+from itertools import combinations
+
+def choose_best_sum(t, k, ls):
+    best_sum = -1
+    for distances in combinations(ls, k):
+        current_sum = sum(distances)
+        if current_sum <= t and current_sum > best_sum:
+            best_sum = current_sum
+    return best_sum if best_sum != -1 else None
