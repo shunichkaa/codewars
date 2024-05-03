@@ -1,0 +1,30 @@
+from collections import deque
+
+def find_shortest_path(grid, start_node, end_node):
+    if not grid or not grid[0]:
+        return []
+
+    rows, cols = len(grid), len(grid[0])
+    visited = set()
+    queue = deque([(start_node.position, [start_node])])
+
+    while queue:
+        current_pos, path = queue.popleft()
+        current_node = grid[current_pos.x][current_pos.y]  # Access coordinates correctly
+
+        if current_node == end_node:
+            return path
+
+        if current_pos in visited:
+            continue
+
+        visited.add(current_pos)
+
+        for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            new_x, new_y = current_pos.x + dx, current_pos.y + dy  # Access coordinates correctly
+            if 0 <= new_x < rows and 0 <= new_y < cols:
+                next_node = grid[new_x][new_y]
+                if next_node.passable:
+                    queue.append((next_node.position, path + [next_node]))
+
+    return []
