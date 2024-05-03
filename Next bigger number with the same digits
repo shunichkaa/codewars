@@ -1,3 +1,13 @@
+#Create a function that takes a positive integer and returns the next bigger number that can be formed by rearranging its digits.
+
+
+
+
+
+
+
+
+
 def next_bigger(n):
     s = list(str(n))
     i = len(s) - 2
