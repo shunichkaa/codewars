@@ -1,0 +1,40 @@
+#Write a function that will solve a 9x9 Sudoku puzzle. The function will take one argument consisting of the 2D puzzle array, with the value 0 representing an unknown square.
+#The Sudokus tested against your function will be "insane" and can have multiple solutions. The solution only need to give one valid solution in the case of the multiple solution sodoku.
+#It might require some sort of brute force.
+
+
+
+
+
+
+
+
+
+def solve(board):
+    def is_valid(row, col, num):
+        for i in range(9):
+            if board[row][i] == num or board[i][col] == num or board[3 * (row // 3) + i // 3][3 * (col // 3) + i % 3] == num:
+                return False
+        return True
+
+    def find_empty():
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == 0:
+                    return i, j
+        return None, None
+
+    def solve_helper():
+        row, col = find_empty()
+        if row is None:
+            return True
+        for num in range(1, 10):
+            if is_valid(row, col, num):
+                board[row][col] = num
+                if solve_helper():
+                    return True
+                board[row][col] = 0
+        return False
+
+    solve_helper()
+    return board
