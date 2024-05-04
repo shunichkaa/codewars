@@ -1,0 +1,35 @@
+#Greed is a dice game played with five six-sided dice.
+#Your mission, should you choose to accept it, is to score a throw according to these rules.
+#You will always be given an array with five six-sided dice values.
+
+
+
+
+
+
+
+
+
+def score(dice):
+    # Initialize the score and count for each number
+    score = 0
+    counts = [0] * 6
+
+    # Count the occurrences of each number
+    for value in dice:
+        counts[value - 1] += 1
+
+    # Calculate the score based on the counts
+    for i in range(6):
+        if counts[i] >= 3:
+            if i == 0:  # Three 1's
+                score += 1000
+            else:       # Three of any other number
+                score += (i + 1) * 100
+            counts[i] -= 3
+
+    # Add the score for remaining individual dice
+    score += counts[0] * 100   # One 1
+    score += counts[4] * 50    # One 5
+
+    return score
