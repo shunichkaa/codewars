@@ -1,0 +1,49 @@
+#Input:
+#Your function will receive two strings, each comprised of digits representing a positive integer. These two values will represent the upper and lower bounds of a range.
+
+#Output:
+#Your function must return the number of valid upside down numbers within the range of the two input arguments, including both upper and lower bounds.
+
+
+
+
+
+
+
+
+
+
+def upsidedown(x, y):
+    count = 0
+    for num in range(int(x), int(y) + 1):
+        if is_upsidedown(str(num)):
+            count += 1
+    return count
+
+def is_upsidedown(num_str):
+    upside_map = {'0': '0', '1': '1', '6': '9', '8': '8', '9': '6'}
+    rotated_num = ''.join(upside_map[digit] if digit in upside_map else '' for digit in num_str[::-1])
+    return num_str == rotated_num
+
+
+
+
+OR
+
+
+
+
+
+def upsidedown(x, y):
+    return sum(is_upsidedown(str(num)) for num in range(int(x), int(y) + 1))
+
+def is_upsidedown(num_str):
+    upside_map = {'0': '0', '1': '1', '6': '9', '8': '8', '9': '6'}
+    return num_str == ''.join(upside_map.get(digit, '') for digit in num_str[::-1])
+
+
+
+OR
+
+
+
