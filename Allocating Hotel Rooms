@@ -1,0 +1,21 @@
+#Allocate customers to hotel rooms based on their arrival and departure days.
+#Each customer wants their own room, so two customers can stay in the same room only if the departure day of the first customer
+#is earlier than the arrival day of the second customer. 
+#The number of rooms used should be minimized.
+
+
+
+
+
+
+
+
+
+def allocate_rooms(customers):
+    res = [0] * len(customers)
+    dep = [0] * len(customers)
+    for i, (a, d) in sorted(enumerate(customers), key = lambda x: x[1]):
+        n = next(r for r, d in enumerate(dep) if d < a)
+        dep[n] = d
+        res[i] = n + 1
+    return res
