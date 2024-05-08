@@ -1,0 +1,17 @@
+#Given two integers a and b, return the sum of the numerator and the denominator of the reduced fraction a/b.
+
+
+
+
+
+
+
+
+
+from math import gcd
+
+def fraction(a, b):
+    common_divisor = gcd(a, b)
+    numerator = a // common_divisor
+    denominator = b // common_divisor
+    return numerator + denominator
