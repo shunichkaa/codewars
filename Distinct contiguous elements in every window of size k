@@ -1,0 +1,41 @@
+#Given an array of size n, and an integer k, 
+#return the count of distinct contiguous numbers for all windows of size k.
+#k will always be lower than or equal to n.
+
+
+
+
+
+
+
+
+
+from collections import defaultdict
+
+def count_contiguous_distinct(k, arr):
+    n = len(arr)
+    result = []
+    window_counts = defaultdict(int)
+    distinct_count = 0
+    
+    # Count distinct elements in the first window
+    for i in range(k):
+        if window_counts[arr[i]] == 0:
+            distinct_count += 1
+        window_counts[arr[i]] += 1
+    
+    result.append(distinct_count)
+    
+    # Slide the window and update distinct count for each window
+    for i in range(k, n):
+        if window_counts[arr[i - k]] == 1:
+            distinct_count -= 1
+        window_counts[arr[i - k]] -= 1
+        
+        if window_counts[arr[i]] == 0:
+            distinct_count += 1
+        window_counts[arr[i]] += 1
+        
+        result.append(distinct_count)
+    
+    return result
