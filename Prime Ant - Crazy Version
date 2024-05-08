@@ -35,3 +35,44 @@ def smallest_divisor(num):
         if num % i == 0:
             return i
     return num
+
+
+
+OR
+
+
+
+LIMIT = 10 ** 7 // 2
+
+minimal_prime_factors = list(range(LIMIT + 1))
+minimal_prime_factors[4::2] = (LIMIT // 2 - 1) * [2]
+for i in range(3, int((LIMIT+1)**.5) + 1, 2):
+    if minimal_prime_factors[i] == i:
+        for j in range(i*i, LIMIT+1, i):
+            if minimal_prime_factors[j] == j:
+                minimal_prime_factors[j] = i
+
+from bisect import bisect
+
+common_sequence = [0, 1, 2]
+computed_steps, reached_indexes, tails = [0], [2], [[]]
+
+def prime_ant(n):
+    closest_smaller_step = bisect(computed_steps, n) - 1
+    idx = reached_indexes[closest_smaller_step]
+    seq = common_sequence[:idx+1] + tails[closest_smaller_step]
+    for step in range(computed_steps[closest_smaller_step], n):
+        m = minimal_prime_factors[seq[idx]]
+        if m == seq[idx]:
+            idx += 1
+            if idx == len(seq): seq.append(idx)
+        else:
+            seq[idx] //= m; idx -= 1; seq[idx] += m
+            if step >= computed_steps[-1]:
+                common_sequence[idx:] = seq[idx:]
+                while idx <= reached_indexes[-1]:
+                    computed_steps.pop(); reached_indexes.pop(); tails.pop()
+                computed_steps.append(step+1)
+                reached_indexes.append(idx)
+                tails.append(common_sequence[idx+1:])
+    return seq[2:idx+1]
