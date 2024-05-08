@@ -1,0 +1,25 @@
+#Given a string, return if all occurrences of a given letter are always immediately followed by the other given letter.
+
+
+
+
+
+
+
+
+
+def best_friend(txt, a, b):
+    occurrences_a = []
+    occurrences_b = []
+    
+    for i in range(len(txt)):
+        if txt[i] == a:
+            occurrences_a.append(i)
+        elif txt[i] == b:
+            occurrences_b.append(i)
+    
+    for index in occurrences_a:
+        if index + 1 not in occurrences_b:
+            return False
+    
+    return True
