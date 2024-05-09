@@ -1,0 +1,17 @@
+#Find the difference between two collections. 
+#The difference means that either the character is present in one collection or it is present in other, 
+#but not in both. Return a sorted list with the difference.
+
+
+
+
+
+
+
+
+
+def diff(a, b):
+    set_a = set(a)
+    set_b = set(b)
+    diff_set = set_a.symmetric_difference(set_b)
+    return sorted(diff_set)
